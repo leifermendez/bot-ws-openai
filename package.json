@@ -11,7 +11,7 @@
     "dependencies": {
         "@adiwajshing/baileys": "github:WhiskeySockets/Baileys",
         "@adiwajshing/keyed-db": "^0.2.4",
-        "@bot-whatsapp/bot": "0.0.131-alpha.0",
+        "@bot-whatsapp/bot": "0.0.132-alpha.0",
         "@bot-whatsapp/cli": "latest",
         "@bot-whatsapp/database": "latest",
         "@bot-whatsapp/portal": "latest",
