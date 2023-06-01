@@ -35,7 +35,8 @@ const employeesAddon = init(employeesAddonConfig);
  *
  */
 
-const flowVentas = addKeyword(["pedir", "ordenar"]).addAnswer(
+const flowVentas = addKeyword(["pedir", "ordenar"])
+.addAnswer(
   ["Claro que te interesa?", "mejor te envio audio.."],
   null,
   async (_, { flowDynamic }) => {
@@ -59,7 +60,8 @@ const flowVoiceNote = addKeyword(EVENTS.VOICE_NOTE).addAction(
     const text = await handlerAI(ctx);
     console.log(`🤖 Fin voz a texto....[TEXT]: ${text}`);
 
-    const empleado = await employeesAddon.determine(text); //TODO<===
+    const empleado = await employeesAddon.determine(text); 
+
     employeesAddon.gotoFlow(empleado, ctxFn);
 
   }
