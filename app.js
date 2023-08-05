@@ -65,13 +65,7 @@ const main = async () => {
       description:
         "Soy Jorge el staff amable encargado de atentender las solicitudes de los viajeros si tienen dudas, preguntas sobre el tour o la ciudad de amsterdam, mis respuestas son breves.",
       flow: flowStaff,
-    },
-    {
-      name: "EMPLEADO_STAFF_CONTADOR",
-      description:
-        "Soy Steffany, encargada de las devoluciones, reembolsos problemas que tengas con tus productos. mis respuestas breves.",
-      flow: flowSoporte,
-    },
+    }
   ];
 
   employeesAddon.employees(employees);
