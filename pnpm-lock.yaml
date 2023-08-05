@@ -3,25 +3,25 @@ lockfileVersion: '6.0'
 dependencies:
   '@adiwajshing/baileys':
     specifier: github:WhiskeySockets/Baileys
-    version: github.com/WhiskeySockets/Baileys/58ffd33a1e8e69c9fc7f6d0d9fe9939682c10d9a(@adiwajshing/keyed-db@0.2.4)
+    version: github.com/WhiskeySockets/Baileys/555cc9b3145ea2a94aeb34eec30eb966154b16f8
   '@adiwajshing/keyed-db':
     specifier: ^0.2.4
     version: 0.2.4
   '@bot-whatsapp/bot':
-    specifier: 0.1.28
-    version: 0.1.28
+    specifier: dev
+    version: 0.0.136-alpha.0
   '@bot-whatsapp/cli':
-    specifier: ^0.1.28
-    version: 0.1.28
+    specifier: dev
+    version: 0.0.129-alpha.0
   '@bot-whatsapp/database':
-    specifier: ^0.1.28
-    version: 0.1.28
+    specifier: dev
+    version: 0.0.108-alpha.0
   '@bot-whatsapp/portal':
-    specifier: ^0.1.28
-    version: 0.1.28
+    specifier: dev
+    version: 0.0.66-alpha.0
   '@bot-whatsapp/provider':
-    specifier: ^0.1.28
-    version: 0.1.28
+    specifier: dev
+    version: 0.0.122-alpha.0
   '@ffmpeg-installer/ffmpeg':
     specifier: ^1.1.0
     version: 1.1.0
@@ -887,21 +887,27 @@ packages:
     dev: false
     optional: true
 
+  /@bot-whatsapp/bot@0.0.136-alpha.0:
+    resolution: {integrity: sha512-JNLwP+QuVIG11jVseVa3MOnQj5PaG6VBv1De9bMeXXw1WmcKqbn6BHkU/SuAF9einLyxsoElF/9pGXQYi6S03g==}
+    dependencies:
+      dotenv: 16.1.3
+    dev: false
+
   /@bot-whatsapp/bot@0.1.28:
     resolution: {integrity: sha512-NyxEhCdbDiDsAYrzo3qnnZcrLmWBpViZoUkIGkLvWlPnghAEmn2JUbN3oRayCZxC3QWcBwfDDQ6QxAJ4Rkw8uQ==}
     dependencies:
       dotenv: 16.1.3
     dev: false
 
-  /@bot-whatsapp/cli@0.1.28:
-    resolution: {integrity: sha512-xVsb2MJ2VN+jfKgNqsUnbdPzq3gDYsrQnTLxtiFogMbozG+LsrGajVAKna3W5SbDGIsCqkJvCTrXt9ia5Q58uA==}
+  /@bot-whatsapp/cli@0.0.129-alpha.0:
+    resolution: {integrity: sha512-H1BRWTiww1ObHgL6+/Hhn3z523H5ParT7tONPlOotC1wNX1FBDNhWsd/Jmt7GP7ATM9djNbspK+j1AuUQ5gnaw==}
     hasBin: true
     dependencies:
       picocolors: 1.0.0
     dev: false
 
-  /@bot-whatsapp/database@0.1.28:
-    resolution: {integrity: sha512-uenJwJjks74rVaMjG97SxtzJd9yoRBB/5B2gXdG1g5pv3JDiCVMKelyB34CIdo+lNUa5dglZIyqVKu/IbA1VLQ==}
+  /@bot-whatsapp/database@0.0.108-alpha.0:
+    resolution: {integrity: sha512-OkIDgdBtbqvnTvhl+BnWZ81IrsbKOxHi1CUsUglYQx3HntBsrK3YY91oENsc54hRTrAGlj2nH0jUF2DOD4T2QA==}
     dependencies:
       dotenv: 16.1.3
       mongodb: 4.16.0
@@ -910,8 +916,8 @@ packages:
       - aws-crt
     dev: false
 
-  /@bot-whatsapp/portal@0.1.28:
-    resolution: {integrity: sha512-HoYp5XUHq6FIs/G1ck2xxMhz7Rgu9OqEAtHG0gVmW1l44eHQeTj/W+laQFoXQ40/aYJXVzyJO8IvspnD1dSqrg==}
+  /@bot-whatsapp/portal@0.0.66-alpha.0:
+    resolution: {integrity: sha512-fqGfo8JsMhqHZbFu9E+dTiZaw/2GnWIwBSepcaTSuTRC37SGlZjNasHgAoi36ehAox75bUSdyDwCzm3Ut3NhXw==}
     dependencies:
       kleur: 4.1.5
       polka: 0.5.2
@@ -920,8 +926,8 @@ packages:
       - supports-color
     dev: false
 
-  /@bot-whatsapp/provider@0.1.28:
-    resolution: {integrity: sha512-eFgEYsqZi3MLP40qIiwYW+4aAqdJzkXV2nORQcGfLKQYGF6ajQk6J/VHx2+XG5uwBVZ1vB6YH6OFAx+ocTCdaA==}
+  /@bot-whatsapp/provider@0.0.122-alpha.0:
+    resolution: {integrity: sha512-RGPNdhgEYZWCMqpE+Ru6jXFmTJJ8S0T1kdrmWsaQg9Qoq2Z+hDNqpLgApTAyGcllHnGOG4iu4fXt0zt69a9xYg==}
     dependencies:
       '@bot-whatsapp/bot': 0.1.28
       '@ffmpeg-installer/ffmpeg': 1.1.0
@@ -934,6 +940,10 @@ packages:
       sharp: 0.30.7
     transitivePeerDependencies:
       - debug
+    dev: false
+
+  /@eshaz/web-worker@1.2.1:
+    resolution: {integrity: sha512-v5AKAVtM0toVD2rDCGjzhySWlXG/sG5HVialdzrxFKTAnFZNCjQelX0n2tPK0tE86jf4s3hpWlpRtOh8OObktg==}
     dev: false
 
   /@ffmpeg-installer/darwin-arm64@4.1.5:
@@ -1087,6 +1097,18 @@ packages:
     dev: false
     optional: true
 
+  /@thi.ng/bitstream@2.2.23:
+    resolution: {integrity: sha512-QeE4smuo0ymmPyWzs3MtwL6DCRhqKWvsliIvoHs+KuqgDSp9MEYKCKIwlTePwCHRUelAWGs5iwfbcYHrjy9ZTA==}
+    engines: {node: '>=12.7'}
+    dependencies:
+      '@thi.ng/errors': 2.3.0
+    dev: false
+
+  /@thi.ng/errors@2.3.0:
+    resolution: {integrity: sha512-gbOskPQfuZ9logBFFg2yjT8kiKK+YYOVZhChanwIOGvIXwGE+H/IdJt5irXkafzauRiqc4tI6mtkzeA4kDfYKg==}
+    engines: {node: '>=12.7'}
+    dev: false
+
   /@tokenizer/token@0.3.0:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
     dev: false
@@ -1112,6 +1134,26 @@ packages:
     dependencies:
       '@types/node': 20.2.5
       '@types/webidl-conversions': 7.0.0
+    dev: false
+
+  /@wasm-audio-decoders/common@9.0.1:
+    resolution: {integrity: sha512-s4KxPsxhD6e+EtjmHPzTmKJSJTEXHGYlBzUGGLN/plV01x3RecybW73nIMtdLLXL8k/zQ8HYFcA6d9lqCJcDjQ==}
+    dependencies:
+      '@eshaz/web-worker': 1.2.1
+    dev: false
+
+  /@wasm-audio-decoders/flac@0.1.12:
+    resolution: {integrity: sha512-k4PELVzBu4p4j0YmA2K8VF0GxoWWYqkqa3C29nOikOss1SZLnX2CczfiJCklL9AA/9tlZrvBJz3/nDxXDqR35A==}
+    dependencies:
+      '@wasm-audio-decoders/common': 9.0.1
+      codec-parser: 2.4.2
+    dev: false
+
+  /@wasm-audio-decoders/ogg-vorbis@0.1.7:
+    resolution: {integrity: sha512-MftO1fJeBRUuDAZfa9Yp/gf+786PWt/JyiFXj+Ntn0mxlKDyPr3pTXx8PvhmO2/s/nabHDhAhiZi4aXzaBEUpg==}
+    dependencies:
+      '@wasm-audio-decoders/common': 9.0.1
+      codec-parser: 2.4.2
     dev: false
 
   /ajv@6.12.6:
@@ -1145,6 +1187,28 @@ packages:
   /atomic-sleep@1.0.0:
     resolution: {integrity: sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==}
     engines: {node: '>=8.0.0'}
+    dev: false
+
+  /audio-buffer@5.0.0:
+    resolution: {integrity: sha512-gsDyj1wwUp8u7NBB+eW6yhLb9ICf+0eBmDX8NGaAS00w8/fLqFdxUlL5Ge/U8kB64DlQhdonxYC59dXy1J7H/w==}
+    dev: false
+
+  /audio-decode@2.1.4:
+    resolution: {integrity: sha512-i1KTHqBXcU3vVCPXfp4zZCaXsLYyO4CNbt6JhvV1so/PpOpBnIXNFgHEq0bWNsroUV/J6i2/Yck0QhoaCzGh+A==}
+    dependencies:
+      '@wasm-audio-decoders/flac': 0.1.12
+      '@wasm-audio-decoders/ogg-vorbis': 0.1.7
+      audio-buffer: 5.0.0
+      audio-type: 2.2.1
+      mpg123-decoder: 0.4.8
+      node-wav: 0.0.2
+      ogg-opus-decoder: 1.6.4
+      qoa-format: 1.0.0
+    dev: false
+
+  /audio-type@2.2.1:
+    resolution: {integrity: sha512-En9AY6EG1qYqEy5L/quryzbA4akBpJrnBZNxeKTqGHC2xT9Qc4aZ8b7CcbOMFTTc/MGdoNyp+SN4zInZNKxMYA==}
+    engines: {node: '>=14'}
     dev: false
 
   /aws-sign2@0.7.0:
@@ -1246,6 +1310,13 @@ packages:
       ieee754: 1.2.1
     dev: false
 
+  /cache-manager@5.2.3:
+    resolution: {integrity: sha512-9OErI8fksFkxAMJ8Mco0aiZSdphyd90HcKiOMJQncSlU1yq/9lHHxrT8PDayxrmr9IIIZPOAEfXuGSD7g29uog==}
+    dependencies:
+      lodash.clonedeep: 4.5.0
+      lru-cache: 9.1.2
+    dev: false
+
   /caseless@0.12.0:
     resolution: {integrity: sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw==}
     dev: false
@@ -1257,6 +1328,10 @@ packages:
   /clone@2.1.2:
     resolution: {integrity: sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==}
     engines: {node: '>=0.8'}
+    dev: false
+
+  /codec-parser@2.4.2:
+    resolution: {integrity: sha512-RN6gT8aGdDq4vx//Ln+MRDIKPXA3SpJKsCcQSZ4poF2bZCO4/G0C2Ko/MVNpbJ7Y9ewpzeuLlBx2zH8BpcM4ew==}
     dev: false
 
   /color-convert@2.0.1:
@@ -1764,6 +1839,10 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+  /libphonenumber-js@1.10.39:
+    resolution: {integrity: sha512-iPMM/NbSNIrdwbr94rAOos6krB7snhfzEptmk/DJUtTPs+P9gOhZ1YXVPcRgjpp3jJByclfm/Igvz45spfJK7g==}
+    dev: false
+
   /load-bmfont@1.4.1:
     resolution: {integrity: sha512-8UyQoYmdRDy81Brz6aLAUhfZLwr5zV0L3taTQ4hju7m6biuwiWiJXjPhBJxbUQJA8PrkvJ/7Enqmwk2sM14soA==}
     dependencies:
@@ -1775,6 +1854,10 @@ packages:
       phin: 2.9.3
       xhr: 2.6.0
       xtend: 4.0.2
+    dev: false
+
+  /lodash.clonedeep@4.5.0:
+    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
     dev: false
 
   /long@4.0.0:
@@ -1791,6 +1874,11 @@ packages:
   /lru-cache@7.18.3:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
+    dev: false
+
+  /lru-cache@9.1.2:
+    resolution: {integrity: sha512-ERJq3FOzJTxBbFjZ7iDs+NiK4VI9Wz+RdrrAB8dio1oV+YvdPzUEE4QNiT2VD51DkIbCYRUUzCRkssXCHqSnKQ==}
+    engines: {node: 14 || >=16.14}
     dev: false
 
   /matchit@1.1.0:
@@ -1874,6 +1962,12 @@ packages:
       - aws-crt
     dev: false
 
+  /mpg123-decoder@0.4.8:
+    resolution: {integrity: sha512-HXs8vbPjiFM0NOZ45T3C5i7mpYGEYhjH37SnFA907lOb9c93DQL40cDjerxj65IMwAYyPFq1aUjtDOjyR7O0gQ==}
+    dependencies:
+      '@wasm-audio-decoders/common': 9.0.1
+    dev: false
+
   /ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
     dev: false
@@ -1944,12 +2038,25 @@ packages:
       clone: 2.1.2
     dev: false
 
+  /node-wav@0.0.2:
+    resolution: {integrity: sha512-M6Rm/bbG6De/gKGxOpeOobx/dnGuP0dz40adqx38boqHhlWssBJZgLCPBNtb9NkrmnKYiV04xELq+R6PFOnoLA==}
+    engines: {node: '>=4.4.0'}
+    dev: false
+
   /node-webpmux@3.1.7:
     resolution: {integrity: sha512-ySkL4lBCto86OyQ0blAGzylWSECcn5I0lM3bYEhe75T8Zxt/BFUMHa8ktUguR7zwXNdS/Hms31VfSsYKN1383g==}
     dev: false
 
   /oauth-sign@0.9.0:
     resolution: {integrity: sha512-fexhUFFPTGV8ybAtSIGbV6gOkSv8UtRbDBnAyLQw4QPKkgNlsH2ByPGtMUqdWkos6YCRmAqViwgZrJc/mRDzZQ==}
+    dev: false
+
+  /ogg-opus-decoder@1.6.4:
+    resolution: {integrity: sha512-MYqiJyCZWjIKKRJMXRVi69D3VGbaR/FNCNcINNI5Ec5ZUm5pLyDT6f0cYksU0Hb3ZHXXQIp62VJChYqwk60EMg==}
+    dependencies:
+      '@wasm-audio-decoders/common': 9.0.1
+      codec-parser: 2.4.2
+      opus-decoder: 0.7.1
     dev: false
 
   /on-exit-leak-free@0.2.0:
@@ -1976,6 +2083,12 @@ packages:
       form-data: 4.0.0
     transitivePeerDependencies:
       - debug
+    dev: false
+
+  /opus-decoder@0.7.1:
+    resolution: {integrity: sha512-AOFCMKLn7LJm8pOkksY5TsW/6+XmNyh1OQS9gxmdOGHLNYoOBrjSfc0nPNcmUMGEzOrTqZtPi8VJ/ABs2Hndvg==}
+    dependencies:
+      '@wasm-audio-decoders/common': 9.0.1
     dev: false
 
   /parse-bmfont-ascii@1.0.6:
@@ -2157,6 +2270,12 @@ packages:
   /punycode@2.3.0:
     resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
     engines: {node: '>=6'}
+    dev: false
+
+  /qoa-format@1.0.0:
+    resolution: {integrity: sha512-Vjp2aV2x06tHbZesCi2UtISaFdlLzy47Vbt0rNwwdihKFvGtUeFfytdnA8XZYADqWtRbK19+XXeRkv1Stg4qSQ==}
+    dependencies:
+      '@thi.ng/bitstream': 2.2.23
     dev: false
 
   /qr-image@3.2.0:
@@ -2577,6 +2696,11 @@ packages:
     dev: false
     optional: true
 
+  /uuid@9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
+    dev: false
+
   /verror@1.10.0:
     resolution: {integrity: sha512-ZZKSmDAEFOijERBLkmYfJ+vmk3w+7hOLYDNkRCuRuMJGEmqYNCNLyBBFwWKVMhfwaEF3WOd0Zlw86U/WC/+nYw==}
     engines: {'0': node >=0.6.0}
@@ -2672,22 +2796,18 @@ packages:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: false
 
-  github.com/WhiskeySockets/Baileys/58ffd33a1e8e69c9fc7f6d0d9fe9939682c10d9a(@adiwajshing/keyed-db@0.2.4):
-    resolution: {tarball: https://codeload.github.com/WhiskeySockets/Baileys/tar.gz/58ffd33a1e8e69c9fc7f6d0d9fe9939682c10d9a}
-    id: github.com/WhiskeySockets/Baileys/58ffd33a1e8e69c9fc7f6d0d9fe9939682c10d9a
+  github.com/WhiskeySockets/Baileys/555cc9b3145ea2a94aeb34eec30eb966154b16f8:
+    resolution: {tarball: https://codeload.github.com/WhiskeySockets/Baileys/tar.gz/555cc9b3145ea2a94aeb34eec30eb966154b16f8}
     name: '@whiskeysockets/baileys'
-    version: 6.1.0
+    version: 6.4.0
     prepare: true
     requiresBuild: true
     peerDependencies:
-      '@adiwajshing/keyed-db': ^0.2.4
       jimp: ^0.16.1
       link-preview-js: ^3.0.0
       qrcode-terminal: ^0.12.0
       sharp: ^0.30.5
     peerDependenciesMeta:
-      '@adiwajshing/keyed-db':
-        optional: true
       jimp:
         optional: true
       link-preview-js:
@@ -2699,13 +2819,17 @@ packages:
     dependencies:
       '@adiwajshing/keyed-db': 0.2.4
       '@hapi/boom': 9.1.4
+      audio-decode: 2.1.4
       axios: 1.4.0
+      cache-manager: 5.2.3
       futoin-hkdf: 1.5.2
+      libphonenumber-js: 1.10.39
       libsignal: github.com/adiwajshing/libsignal-node/11dbd962ea108187c79a7c46fe4d6f790e23da97
       music-metadata: 7.13.4
       node-cache: 5.1.2
       pino: 7.11.0
       protobufjs: 6.11.3
+      uuid: 9.0.0
       ws: 8.13.0
     transitivePeerDependencies:
       - bufferutil

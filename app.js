@@ -14,43 +14,24 @@ const MockAdapter = require("@bot-whatsapp/database/mock");
 const { handlerAI } = require("./utils");
 const { textToVoice } = require("./services/eventlab");
 
-/**
- *
- * Plugin settings
- * https://platform.openai.com/docs/api-reference
- *
- */
-
 const employeesAddonConfig = {
-  model: "gpt-3.5-turbo",
+  model: "gpt-4-0613",
   temperature: 0,
   apiKey: process.env.OPENAI_API_KEY,
 };
+
 const employeesAddon = init(employeesAddonConfig);
 
-/**
- *
- * 🙉 Flow del Bot
- * https://bot-whatsapp.netlify.app/docs/flows/
- *
- */
-
-const flowVentas = addKeyword(["pedir", "ordenar"])
-.addAnswer(
+const flowStaff = addKeyword(EVENTS.ACTION).addAnswer(
   ["Claro que te interesa?", "mejor te envio audio.."],
   null,
-  async (_, { flowDynamic }) => {
+  async (_, { flowDynamic, state }) => {
     console.log("🙉 texto a voz....");
-    const path = await textToVoice(
-      "Si claro como te puedo ayudar si gustas enviame detalle de tecnicos que necesitas para tu servidor"
-    );
+    const currentState = state.getMyState();
+    const path = await textToVoice(currentState.answer);
     console.log(`🙉 Fin texto a voz....[PATH]:${path}`);
     await flowDynamic([{ body: "escucha", media: path }]);
   }
-);
-
-const flowSoporte = addKeyword(["necesito ayuda"]).addAnswer(
-  "Claro como te puedo ayudar?"
 );
 
 const flowVoiceNote = addKeyword(EVENTS.VOICE_NOTE).addAction(
@@ -59,27 +40,18 @@ const flowVoiceNote = addKeyword(EVENTS.VOICE_NOTE).addAction(
     console.log("🤖 voz a texto....");
     const text = await handlerAI(ctx);
     console.log(`🤖 Fin voz a texto....[TEXT]: ${text}`);
-
-    const empleado = await employeesAddon.determine(text); 
-
-    employeesAddon.gotoFlow(empleado, ctxFn);
-
+    const currentState = ctxFn.state.getMyState();
+    const fullSentence = `${currentState?.answer ?? ""}. ${text}`;
+    const { employee, answer } = await employeesAddon.determine(fullSentence);
+    ctxFn.state.update({ answer });
+    employeesAddon.gotoFlow(employee, ctxFn);
   }
 );
-
-const flowDemo = addKeyword("demo").addAction((ctx, { gotoFlow }) => {
-  gotoFlow(flowVentas);
-});
 
 const main = async () => {
   const adapterDB = new MockAdapter();
 
-  const adapterFlow = createFlow([
-    flowVoiceNote,
-    flowVentas,
-    flowSoporte,
-    flowDemo,
-  ]);
+  const adapterFlow = createFlow([flowVoiceNote, flowStaff]);
 
   const adapterProvider = createProvider(BaileysProvider);
 
@@ -89,13 +61,13 @@ const main = async () => {
    */
   const employees = [
     {
-      name: "EMPLEADO_VENDEDOR",
+      name: "EMPLEADO_STAFF_TOUR",
       description:
-        "Soy Rob el vendedor amable encargado de atentender si tienes intencion de comprar o interesado en algun producto, mis respuestas son breves. Envia 1-3 emojis:🤖 🚀 🤔",
-      flow: flowVentas,
+        "Soy Jorge el staff amable encargado de atentender las solicitudes de los viajeros si tienen dudas, preguntas sobre el tour o la ciudad de amsterdam, mis respuestas son breves.",
+      flow: flowStaff,
     },
     {
-      name: "EMPLEADO_DEVOLUCIONES",
+      name: "EMPLEADO_STAFF_CONTADOR",
       description:
         "Soy Steffany, encargada de las devoluciones, reembolsos problemas que tengas con tus productos. mis respuestas breves.",
       flow: flowSoporte,
