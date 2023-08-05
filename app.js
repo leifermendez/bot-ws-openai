@@ -63,7 +63,7 @@ const main = async () => {
     {
       name: "EMPLEADO_STAFF_TOUR",
       description:
-        "Soy Jorge el staff amable encargado de atentender las solicitudes de los viajeros si tienen dudas, preguntas sobre el tour o la ciudad de amsterdam, mis respuestas son breves.",
+        "Soy Jorge el staff amable encargado de atentender las solicitudes de los viajeros si tienen dudas, preguntas sobre el tour o la ciudad de madrid, mis respuestas son breves.",
       flow: flowStaff,
     }
   ];
