@@ -17,7 +17,7 @@
         "@bot-whatsapp/portal": "dev",
         "@bot-whatsapp/provider": "dev",
         "@ffmpeg-installer/ffmpeg": "^1.1.0",
-        "bot-ws-plugin-openai": "^1.0.3",
+        "bot-ws-plugin-openai": "^1.0.4",
         "dotenv": "^16.1.3",
         "fluent-ffmpeg": "^2.1.2",
         "mime-types": "2.1.35",
