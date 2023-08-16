@@ -1,5 +1,6 @@
 ### CHATBOT Whatsapp (Baileys Provider)
 
+[Version de VENDEDORES gpt 3.5](https://github.com/leifermendez/bot-ws-openai/tree/35441dbf99c86ce4e1be0686f5c46aa050d0cab6)
 <p align="center">
   <img width="300" src="https://i.imgur.com/Oauef6t.png">
 </p>
