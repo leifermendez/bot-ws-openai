@@ -14,10 +14,8 @@ const convertOggMp3 = async (inputStream, outStream) => {
       .audioQuality(96)
       .toFormat("mp3")
       .save(outStream)
-      .on("progress", (p) => null)
-      .on("end", () => {
-        resolve(true);
-      });
+      .on("end", () => resolve(true))
+      .on("error", (err) => reject(err));
   });
 };
 

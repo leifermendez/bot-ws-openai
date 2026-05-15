@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const fs = require("node:fs/promises");
 const {
   createBot,
   createProvider,
@@ -8,7 +9,7 @@ const {
   EVENTS,
 } = require("@bot-whatsapp/bot");
 const QRPortalWeb = require("@bot-whatsapp/portal");
-const { init } = require("bot-ws-plugin-openai");
+const { init } = require("./plugin/plugin.employees");
 const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 const MockAdapter = require("@bot-whatsapp/database/mock");
 const { handlerAI } = require("./utils");
@@ -30,21 +31,32 @@ const flowStaff = addKeyword(EVENTS.ACTION).addAnswer(
     const currentState = state.getMyState();
     const path = await textToVoice(currentState.answer);
     console.log(`🙉 Fin texto a voz....[PATH]:${path}`);
-    await flowDynamic([{ body: "escucha", media: path }]);
+    try {
+      await flowDynamic([{ body: "escucha", media: path }]);
+    } finally {
+      await fs.unlink(path).catch(() => {});
+    }
   }
 );
 
 const flowVoiceNote = addKeyword(EVENTS.VOICE_NOTE).addAction(
   async (ctx, ctxFn) => {
-    await ctxFn.flowDynamic("dame un momento para escucharte...🙉");
-    console.log("🤖 voz a texto....");
-    const text = await handlerAI(ctx);
-    console.log(`🤖 Fin voz a texto....[TEXT]: ${text}`);
-    const currentState = ctxFn.state.getMyState();
-    const fullSentence = `${currentState?.answer ?? ""}. ${text}`;
-    const { employee, answer } = await employeesAddon.determine(fullSentence);
-    ctxFn.state.update({ answer });
-    employeesAddon.gotoFlow(employee, ctxFn);
+    try {
+      await ctxFn.flowDynamic("dame un momento para escucharte...🙉");
+      console.log("🤖 voz a texto....");
+      const text = await handlerAI(ctx);
+      console.log(`🤖 Fin voz a texto....[TEXT]: ${text}`);
+      const currentState = ctxFn.state.getMyState();
+      const fullSentence = `${currentState?.answer ?? ""}. ${text}`;
+      const { employee, answer } = await employeesAddon.determine(fullSentence);
+      ctxFn.state.update({ answer });
+      employeesAddon.gotoFlow(employee, ctxFn);
+    } catch (err) {
+      console.error("❌ Error procesando nota de voz:", err);
+      await ctxFn.flowDynamic(
+        "Hubo un problema procesando tu mensaje, ¿podrías intentarlo de nuevo?"
+      );
+    }
   }
 );
 
@@ -65,7 +77,7 @@ const main = async () => {
       description:
         "Soy Jorge el staff amable encargado de atentender las solicitudes de los viajeros si tienen dudas, preguntas sobre el tour o la ciudad de madrid, mis respuestas son breves.",
       flow: flowStaff,
-    }
+    },
   ];
 
   employeesAddon.employees(employees);
@@ -76,8 +88,7 @@ const main = async () => {
     database: adapterDB,
   });
 
-  QRPortalWeb()
-  
+  QRPortalWeb();
 };
 
 main();

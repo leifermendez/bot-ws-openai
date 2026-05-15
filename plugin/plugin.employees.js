@@ -2,6 +2,7 @@ const OpenAiClass = require("./openai.class");
 const { determineAgent } = require("../services/determine");
 const { buildPromptEmployee, finalPrompt } = require("./employee.rol");
 const { cleanText } = require("./util");
+const PROMPTS = require("./prompt");
 
 class EmployeesClass extends OpenAiClass {
   listEmployees = [];
@@ -10,69 +11,61 @@ class EmployeesClass extends OpenAiClass {
     super(_settings);
   }
 
-  /**
-   *
-   * @param {*} employees [] array
-   */
   employees = (employees = []) => {
     this.listEmployees = employees;
   };
 
-  /**
-   *
-   * @param {*} employeeName
-   * @returns
-   */
   getAgent = (employeeName) => {
-    const indexEmployee = this.listEmployees.findIndex(
-      (emp) => emp.name === employeeName
-    );
-    return this.listEmployees[indexEmployee];
+    return this.listEmployees.find((emp) => emp.name === employeeName);
   };
 
   /**
-   *
+   * Routes the user input to the best-matching employee and produces an answer
+   * in that employee's voice.
+   * @param {string} text User input.
+   * @returns {Promise<{ employee: object, answer: string }>}
    */
   determine = async (text) => {
-    try {
+    const routerPrompt = finalPrompt(
+      text,
+      buildPromptEmployee(this.listEmployees)
+    );
 
-      const promptOutput = finalPrompt(
-        text,
-        buildPromptEmployee(this.listEmployees)
-      );
+    const routerResp = await this.sendChat([
+      { role: "user", content: cleanText(routerPrompt) },
+    ]);
 
-      const llmDetermineEmployee = await this.sendChat([
-        {
-          role: "user",
-          content: cleanText(promptOutput),
-        },
-      ]);
-
-
-      if(llmDetermineEmployee?.error){
-        throw new Error(llmDetermineEmployee?.error?.message)
-      }
-
-      const bestChoise = determineAgent(
-        llmDetermineEmployee.choices[0].message.content
-      );
-      const employee = this.getAgent(bestChoise.tool);
-      return employee;
-
-    } catch (err) {
-      console.log(err);
-      return `ERROR_DETERMINANDO_EMPELADO: ${err.message}`;
+    if (routerResp?.error) {
+      throw new Error(routerResp.error.message);
     }
+
+    const choice = determineAgent(routerResp.choices[0].message.content);
+    const employee = this.getAgent(choice.tool);
+    if (!employee) {
+      throw new Error(`Empleado no encontrado: ${choice.tool}`);
+    }
+
+    const systemPrompt = `${PROMPTS.PROMPT_PREFIX_AGENT} ${employee.description} ${PROMPTS.PROMPT_END_AGENT}`;
+    const answerResp = await this.sendChat([
+      { role: "system", content: cleanText(systemPrompt) },
+      { role: "user", content: text },
+    ]);
+
+    if (answerResp?.error) {
+      throw new Error(answerResp.error.message);
+    }
+
+    return {
+      employee,
+      answer: answerResp.choices[0].message.content,
+    };
   };
 
-  /**
-   * @param {*} employee 
-   * @param {*} ctxFn 
-   */
-  _gotoFlow = (employee, ctxFn) => {
-    const flow = employee.flow
-    ctxFn.gotoFlow(flow)
-  }
+  gotoFlow = (employee, ctxFn) => {
+    ctxFn.gotoFlow(employee.flow);
+  };
 }
 
-module.exports = EmployeesClass;
+const init = (settings) => new EmployeesClass(settings);
+
+module.exports = { EmployeesClass, init };

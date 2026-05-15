@@ -1,39 +1,49 @@
-const fs = require('node:fs')
+const fs = require('node:fs/promises');
+
 /**
- *
- * @param {*} voiceId clone voice vwfl76D5KBjKuSGfTbLB
- * @returns
+ * Generates speech from text using ElevenLabs.
+ * @param {string} text Text to synthesize.
+ * @param {string} [voiceId] ElevenLabs voice id (defaults to a cloned voice).
+ * @returns {Promise<string>} Absolute path of the generated mp3.
  */
-const textToVoice = async (text,voiceId = 'vwfl76D5KBjKuSGfTbLB') => {
-  const EVENT_TOKEN = process.env.EVENT_TOKEN ?? "";
+const textToVoice = async (text, voiceId = 'vwfl76D5KBjKuSGfTbLB') => {
+  const EVENT_TOKEN = process.env.EVENT_TOKEN ?? '';
+  if (!EVENT_TOKEN) {
+    throw new Error('EVENT_TOKEN no configurado (ElevenLabs API key)');
+  }
+
   const URL = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`;
 
-  const header = new Headers();
-  header.append("accept", "audio/mpeg");
-  header.append("xi-api-key", EVENT_TOKEN);
-  header.append("Content-Type", "application/json");
+  const headers = new Headers();
+  headers.append('accept', 'audio/mpeg');
+  headers.append('xi-api-key', EVENT_TOKEN);
+  headers.append('Content-Type', 'application/json');
 
-  const raw = JSON.stringify({
+  const body = JSON.stringify({
     text,
-    model_id: "eleven_multilingual_v1",
+    model_id: 'eleven_multilingual_v1',
     voice_settings: {
       stability: 1,
       similarity_boost: 0.8,
     },
   });
 
-  const requestOptions = {
-    method: "POST",
-    headers: header,
-    body: raw,
-    redirect: "follow",
-  };
+  const response = await fetch(URL, {
+    method: 'POST',
+    headers,
+    body,
+    redirect: 'follow',
+  });
 
-  const response = await fetch(URL, requestOptions);
+  if (!response.ok) {
+    const errBody = await response.text().catch(() => '');
+    throw new Error(`ElevenLabs ${response.status}: ${errBody}`);
+  }
+
   const buffer = await response.arrayBuffer();
-  const pathFile = `${process.cwd()}/tmp/${Date.now()}-auido.mp3`;
-  fs.writeFileSync(pathFile, Buffer.from(buffer));
-  
+  const pathFile = `${process.cwd()}/tmp/${Date.now()}-audio.mp3`;
+  await fs.writeFile(pathFile, Buffer.from(buffer));
+
   return pathFile;
 };
 
