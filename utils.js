@@ -4,19 +4,21 @@ const { convertOggMp3 } = require('./services/convert');
 const { voiceToText } = require('./services/whisper');
 
 const handlerAI = async (ctx) => {
-  /**
-   * OMITIR
-   */
-  const buffer = await downloadMediaMessage(ctx, "buffer");
-  const pathTmpOgg = `${process.cwd()}/tmp/voice-note-${Date.now()}.ogg`;
-  const pathTmpMp3 = `${process.cwd()}/tmp/voice-note-${Date.now()}.mp3`;
-  await fs.writeFile(pathTmpOgg, buffer);
-  await convertOggMp3(pathTmpOgg, pathTmpMp3);
-  const text = await voiceToText(pathTmpMp3);
-  return text; //el habla1!!
-  /**
-   * OMITIR
-   */
+  const buffer = await downloadMediaMessage(ctx, 'buffer');
+  const timestamp = Date.now();
+  const pathTmpOgg = `${process.cwd()}/tmp/voice-note-${timestamp}.ogg`;
+  const pathTmpMp3 = `${process.cwd()}/tmp/voice-note-${timestamp}.mp3`;
+
+  try {
+    await fs.writeFile(pathTmpOgg, buffer);
+    await convertOggMp3(pathTmpOgg, pathTmpMp3);
+    return await voiceToText(pathTmpMp3);
+  } finally {
+    await Promise.allSettled([
+      fs.unlink(pathTmpOgg),
+      fs.unlink(pathTmpMp3),
+    ]);
+  }
 };
 
 module.exports = { handlerAI };
